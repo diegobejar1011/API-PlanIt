@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { db } from "./core/data/mysql/application/conn";
+import { indexRouter } from "./core/IndexRouter";
 
 const app = express();
 
@@ -8,8 +9,9 @@ app.use(cors());
 app.use(express.json());
 
 const port = 3000;
-
 app.set("PORT", port);
+
+app.use("/api", indexRouter);
 
 app.listen(app.get("PORT"), () => {
     console.log("API PlanIt running in server...")
