@@ -3,12 +3,12 @@ import { AuthRepository } from "../../domain/repositories/AuthRepository";
 import jwt from "jsonwebtoken";
 
 export class JWTRepository implements AuthRepository {
-    validateToken(token: string): string {
-        try {
-            return "Not implemented"
-        } catch (error: any) {
-            throw new Error(error.message);
-        }
+    validateToken(token: string) {
+        jwt.verify(token, JWT_SECRET_KEY, (err: any, _decodeToken) => {
+            if(err) {
+                throw new Error(err.message)
+            }
+        });
     }
 
     createToken(data: any): string {
