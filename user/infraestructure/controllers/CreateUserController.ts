@@ -14,7 +14,11 @@ export class CreateUserController {
             res.status(200).json(result);
         } catch (error: any) {
             console.log("Error al crear un usuario: " + error);
-            res.status(500).json(error);
+            
+            res.status(500).json({
+                error: "Error al crear el usuario",
+                message: error.message
+            });
         }
     }
 }
