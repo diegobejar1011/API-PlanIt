@@ -7,8 +7,8 @@ import { CreateUserService, SaveTokenService, ValidateUserService } from "../app
 // Controllers
 import { CreateUserController, SaveTokenController, ValidateUserController } from "./controllers";
 import { BcryptRepository } from "./adapters/BcryptRepository";
-import { createTokenService } from "../../auth/infraestructure/AuthDependencies";
 import { GetTokenService } from "../application/GetTokenService";
+import { createTokenService } from "../../auth/infraestructure/authDependencies";
 
 const mysqlRepository = new MySQLRepository();
 const bcryptRepository = new BcryptRepository();
