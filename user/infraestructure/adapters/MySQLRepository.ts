@@ -1,8 +1,32 @@
 import { db } from "../../../core/data/mysql/application/conn";
-import { CreateUserReq, CreateUserRes, User } from "../../domain/entities";
+import { CreateUserReq, CreateUserRes, SaveTokenReq, User } from "../../domain/entities";
 import { DataRepository } from "../../domain/repositories/DataRepository";
 
 export class MySQLRepository implements DataRepository {
+
+    async getToken(id: number): Promise<string> {
+        try {
+            const query = "SELECT token FROM token_user WHERE user_id = ?";
+
+            const token: any = await db.execute(query, [id]);
+
+            return token[0][0].token;
+        } catch (error: any) {
+            throw new Error(error.message);
+        }
+    }
+
+    async saveToken(saveTokenReq: SaveTokenReq): Promise<void> {
+        try {
+            
+            const query = "INSERT INTO token_user (user_id, token) VALUES (?, ?)";
+
+            await db.execute(query, [saveTokenReq.id, saveTokenReq.token]);
+
+        } catch (error: any) {
+            throw new Error(error.message);
+        }
+    }
 
     async create(createUserReq: CreateUserReq): Promise<CreateUserRes> {
         try {
