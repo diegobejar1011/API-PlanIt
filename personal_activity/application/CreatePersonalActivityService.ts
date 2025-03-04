@@ -1,4 +1,4 @@
-import { PersonalActivityInfoReq, PersonalActivityReq } from "../domain/entities";
+import { PersonalActivityInfoReq } from "../domain/entities";
 import { DataRepository } from "../domain/repositories/DataRepository";
 
 export class CreatePersonalActivityService {

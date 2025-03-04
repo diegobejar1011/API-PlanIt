@@ -32,7 +32,7 @@ export class MySQLRepository implements DataRepository{
 
             const [rows]: any = await db.execute(query, [user_id]);
 
-            return rows[0];
+            return rows;
         } catch(error: any) {
             throw new Error(error.message);
         }
