@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.personalActivityRouter = void 0;
+const express_1 = require("express");
+const personalActivityDependencies_1 = require("./personalActivityDependencies");
+exports.personalActivityRouter = (0, express_1.Router)();
+exports.personalActivityRouter.get("/info/:id", personalActivityDependencies_1.getPersonalActivityInfoController.run.bind(personalActivityDependencies_1.getPersonalActivityInfoController));
+exports.personalActivityRouter.get("/info", personalActivityDependencies_1.getPersonalActivitiesInfoController.run.bind(personalActivityDependencies_1.getPersonalActivitiesInfoController));
+exports.personalActivityRouter.get("/:userId", personalActivityDependencies_1.getPersonalActivitiesController.run.bind(personalActivityDependencies_1.getPersonalActivitiesController));
+exports.personalActivityRouter.post("/", personalActivityDependencies_1.createPersonalActivityController.run.bind(personalActivityDependencies_1.createPersonalActivityController));
+exports.personalActivityRouter.put("/:id", personalActivityDependencies_1.updatePersonalActivityController.run.bind(personalActivityDependencies_1.updatePersonalActivityController));
+exports.personalActivityRouter.delete("/:id", personalActivityDependencies_1.deletePersonalActivityController.run.bind(personalActivityDependencies_1.deletePersonalActivityController));

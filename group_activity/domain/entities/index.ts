@@ -1,5 +1,3 @@
-export * from './AssginedGroupActivityReq';
-export * from './AssignedGroupActivity';
 export * from './GroupActivity';
 export * from './GroupActivityInfo';
 export * from './GroupActivityInfoReq';
