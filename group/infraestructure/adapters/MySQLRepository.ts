@@ -6,7 +6,11 @@ export class MySQLRepository implements DataRepository {
 
     async getUsersAtGroup(groupId: number): Promise<[UserAtGroup]> {
         try {
-            const query = "SELECT id, user_id FROM group_user WHERE group_id = ?";
+            const query = `SELECT gu.id, user_id, u.firstname, u.lastname 
+                                FROM group_user AS gu
+                                INNER JOIN user AS u
+                                ON gu.user_id = u.id
+                                WHERE group_id = ?`;
 
             const rows: any = await db.execute(query, [groupId]);
 
