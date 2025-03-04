@@ -10,9 +10,9 @@ export class GetGroupActivitiesController {
             const { groupId, status } = req.query;
 
             if (!groupId) {
-                return res.status(400).json({ error: "El id del grupo es requerido" });
+                throw new Error("El id del grupo es requerido" );
             } else if (!status) {
-                return res.status(400).json({ error: "El status de las actividades es requerido" });
+                throw new Error("El status de las actividades es requerido");
             }
 
             const groupActivities = await this.getGroupActivitiesService.run(parseInt(groupId.toString()), status.toString());
