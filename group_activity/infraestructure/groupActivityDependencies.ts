@@ -1,6 +1,7 @@
-import { CreateGroupActivityInfoService, DeleteGroupActivityInfoService, GetGroupActivitiesInfoService, GetGroupActivityInfoService, UpdateGroupActivityInfoService } from "../application";
+import { CreateGroupActivityInfoService, DeleteGroupActivityInfoService, GetGroupActivitiesInfoService, GetGroupActivitiesService, GetGroupActivityInfoService, UpdateGroupActivityInfoService } from "../application";
+
 import { MySQLRepository } from "./adapters/MySQLRepository";
-import { CreateGroupActivityInfoController, DeleteGroupActivityInfoController, GetGroupActivitiesInfoController, GetGroupActivityInfoController, UpdateGroupActivityInfoController } from "./controllers";
+import { CreateGroupActivityInfoController, DeleteGroupActivityInfoController, GetGroupActivitiesController, GetGroupActivitiesInfoController, GetGroupActivityInfoController, UpdateGroupActivityInfoController } from "./controllers";
 
 const mysqlRepository = new MySQLRepository();
 
@@ -10,6 +11,7 @@ const updateGroupActivityInfoService = new UpdateGroupActivityInfoService(mysqlR
 const deleteGroupActivityInfoService = new DeleteGroupActivityInfoService(mysqlRepository);
 
 const getGroupActivitiesInfoService = new GetGroupActivitiesInfoService(mysqlRepository);
+const getGroupActivitiesService = new GetGroupActivitiesService(mysqlRepository);
 
 export const createGroupActivityInfoController = new CreateGroupActivityInfoController(createGroupActivityInfoService);
 export const getGroupActivityInfoController = new GetGroupActivityInfoController(getGroupActivityInfoService);
@@ -17,3 +19,4 @@ export const updateGroupActivityInfoController = new UpdateGroupActivityInfoCont
 export const deleteGroupActivityInfoController = new DeleteGroupActivityInfoController(deleteGroupActivityInfoService);
 
 export const getGroupActivitiesInfoController = new GetGroupActivitiesInfoController(getGroupActivitiesInfoService);
+export const getGroupActivitiesController = new GetGroupActivitiesController(getGroupActivitiesService);

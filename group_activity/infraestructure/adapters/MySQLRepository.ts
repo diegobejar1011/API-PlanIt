@@ -1,8 +1,31 @@
 import { db } from "../../../core/data/mysql/application/conn";
-import { AssignedGroupActivityReq, GroupActivityInfo, GroupActivityInfoReq, GroupActivityInfoRes } from "../../domain/entities";
+import { GroupActivity, GroupActivityInfo, GroupActivityInfoReq, GroupActivityInfoRes } from "../../domain/entities";
 import { DataRepository } from "../../domain/repositories/DataRepository";
 
 export class MySQLRepository implements DataRepository {
+
+    async getGroupActivities(groupId: number, status: string): Promise<[GroupActivity]> {
+        try {
+            
+            const query = `SELECT 
+                                gai.id AS id, 
+                                ga.title, 
+                                GROUP_CONCAT(CONCAT(u.firstname, ' ', u.lastname) SEPARATOR ', ') AS users
+                            FROM group_activity AS ga
+                            INNER JOIN group_activity_info AS gai ON ga.activity_id = gai.id
+                            LEFT JOIN assigned_group_activity AS aga ON gai.id = aga.activity_id
+                            LEFT JOIN user AS u ON aga.user_id = u.id
+                            WHERE ga.group_id = ? AND gai.status = ?
+                            GROUP BY gai.id, ga.title;`
+            
+            const rows: any = await db.execute(query, [groupId, status]);
+
+            return rows[0];
+
+        } catch (error: any) {
+            throw new Error(error.message);
+        }
+    }
 
 
     async createGroupActivityInfo(groupActivityInfoReq: GroupActivityInfoReq): Promise<void> {

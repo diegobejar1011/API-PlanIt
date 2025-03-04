@@ -1,4 +1,4 @@
-import { GroupActivityInfo, GroupActivityInfoReq, GroupActivityInfoRes, UpdateGroupActivity } from "../entities";
+import { GroupActivity, GroupActivityInfo, GroupActivityInfoReq, GroupActivityInfoRes, UpdateGroupActivity } from "../entities";
 
 export interface DataRepository {
     createGroupActivityInfo(groupActivityInfoReq: GroupActivityInfoReq): Promise<void>;
@@ -6,4 +6,5 @@ export interface DataRepository {
     getGroupActivitiesInfo(): Promise<[GroupActivityInfo]>;
     updateGroupActivityInfo(updateGroupActivity: UpdateGroupActivity, activityId: number): Promise<void>;
     deleteGroupActivityInfo(activityId: number): Promise<void>;
+    getGroupActivities(groupId: number, status: string): Promise<[GroupActivity]>;
 }

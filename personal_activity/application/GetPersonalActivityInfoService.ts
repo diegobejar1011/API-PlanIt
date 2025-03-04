@@ -18,8 +18,6 @@ export class GetPersonalActivityInfoService {
                 date: personalActivityInfo.date
             }
 
-            console.log(personalActivityInfoRes);
-
             return personalActivityInfoRes;
 
         } catch (error: any) {
