@@ -5,4 +5,5 @@ export interface GroupActivityInfoReq {
     status: string;
     description: string;
     date_to: Date;
+    users: [number]
 }

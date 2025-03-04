@@ -1,8 +1,9 @@
 import { db } from "../../../core/data/mysql/application/conn";
-import { GroupActivityInfo, GroupActivityInfoReq, GroupActivityInfoRes } from "../../domain/entities";
+import { AssignedGroupActivityReq, GroupActivityInfo, GroupActivityInfoReq, GroupActivityInfoRes } from "../../domain/entities";
 import { DataRepository } from "../../domain/repositories/DataRepository";
 
 export class MySQLRepository implements DataRepository {
+
 
     async createGroupActivityInfo(groupActivityInfoReq: GroupActivityInfoReq): Promise<void> {
         try {
@@ -15,6 +16,11 @@ export class MySQLRepository implements DataRepository {
             const queryToGroupActivity = "INSERT INTO group_activity (group_id, activity_id, title) VALUES (?, ?, ?)";
 
             await db.execute(queryToGroupActivity, [groupActivityInfoReq.group_id, result[0].insertId, groupActivityInfoReq.title]);
+            const queryToAssignedUserToGroupActivity = "INSERT INTO assigned_group_activity (user_id, activity_id) VALUES (?,?)";
+
+            groupActivityInfoReq.users.map(async (user) => {
+                await db.execute(queryToAssignedUserToGroupActivity, [user, result[0].insertId]);
+            });
 
             await db.commit();
 
@@ -28,7 +34,7 @@ export class MySQLRepository implements DataRepository {
 
     async getGroupActivityInfo(activityId: number): Promise<GroupActivityInfoRes> {
         try {
-            const query = `SELECT gai.id, ga.title, c.name AS category, gai.status, gai.description, gai.date_to 
+            const queryToGroupActivityInfo = `SELECT gai.id, ga.title, c.name AS category, gai.status, gai.description, gai.date_to 
                             FROM group_activity_info AS gai
                             INNER JOIN group_activity AS ga
                             ON gai.id = ga.activity_id
@@ -36,9 +42,21 @@ export class MySQLRepository implements DataRepository {
                             ON gai.category_id = c.id
                             WHERE gai.id = ?;`
             
-            const result: any = await db.execute(query, [activityId]);
+            const resultToGroupActivity: any = await db.execute(queryToGroupActivityInfo, [activityId]);
 
-            return result[0][0];
+            const queryToUsersAtGroupActivity = `SELECT u.id, u.firstname, u.lastname 
+                                                    FROM assigned_group_activity AS aga
+                                                    INNER JOIN user AS u
+                                                    ON aga.user_id = u.id
+                                                    WHERE activity_id = ?;`
+            
+            const rows : any = await db.execute(queryToUsersAtGroupActivity, [activityId]);
+
+            return {
+                ...resultToGroupActivity[0][0],
+                users: [rows[0]]                
+            }
+
         } catch (error: any) {
             throw new Error(error.message);
         }
@@ -72,7 +90,18 @@ export class MySQLRepository implements DataRepository {
 
             await db.execute(queryToGroupActivity, [updateGroupActivity.title, activityId]);
 
+            const queryToDeleteUsersAtAssigment = "DELETE FROM assigned_group_activity WHERE activity_id = ?";
+
+            await db.execute(queryToDeleteUsersAtAssigment, [activityId]);
+
+            const queryToAssignedUserToGroupActivity = "INSERT INTO assigned_group_activity (user_id, activity_id) VALUES (?,?)";
+
+            updateGroupActivity.users.map(async (user) => {
+                await db.execute(queryToAssignedUserToGroupActivity, [user, activityId]);
+            });
+
             await db.commit();
+            
         } catch (error: any) {
 
             await db.rollback();

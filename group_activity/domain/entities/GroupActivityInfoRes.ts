@@ -1,3 +1,5 @@
+import { UserRes } from "../../../user/domain/entities";
+
 export interface GroupActivityInfoRes {
     id: number;
     title: string;
@@ -5,4 +7,5 @@ export interface GroupActivityInfoRes {
     status: string;
     description: string;
     date_to: Date;
+    users: [UserRes]
 }
