@@ -1,7 +1,8 @@
 import { AddUserAtGroupService, CreateGroupService, DeleteGroupService, DeleteUserAtGroupService, GetGroupByIdService, GetUsersAtGroupService, UpdateGroupService } from "../application";
+import { AddUserByTokenService } from "../application/AddUserByTokenService";
 import { MySQLRepository } from "./adapters/MySQLRepository";
-import { UuidRepository } from "./adapters/uuidRepository";
-import { AddUserAtGroupController, CreateGroupController, DeleteGroupController, DeleteUserAtGroupController, GetGroupByIdController, GetUsersAtGroupController, UpdateGroupController } from "./controllers";
+import { UuidRepository } from "./adapters/UuidRepository";
+import { AddUserAtGroupController, AddUserByTokenController, CreateGroupController, DeleteGroupController, DeleteUserAtGroupController, GetGroupByIdController, GetUsersAtGroupController, UpdateGroupController } from "./controllers";
 
 
 const mysqlRepository = new MySQLRepository();
@@ -14,6 +15,7 @@ const deleteGroupService = new DeleteGroupService(mysqlRepository);
 const addUserAtGroupService = new AddUserAtGroupService(mysqlRepository);
 const deleteUserAtGroupService = new DeleteUserAtGroupService(mysqlRepository);
 const getUsersAtGroupService = new GetUsersAtGroupService(mysqlRepository);
+const addUserByTokenService = new AddUserByTokenService(mysqlRepository);
 
 export const createGroupController = new CreateGroupController(createGroupService);
 export const getGroupByIdController = new GetGroupByIdController(getGroupByIdService);
@@ -22,3 +24,4 @@ export const deleteGroupController = new DeleteGroupController(deleteGroupServic
 export const addUserAtGroupController = new AddUserAtGroupController(addUserAtGroupService);
 export const deleteUserAtGroupController = new DeleteUserAtGroupController(deleteUserAtGroupService);
 export const getUsersAtGroupController = new GetUsersAtGroupController(getUsersAtGroupService);
+export const addUserAtGroupByTokenController = new AddUserByTokenController(addUserByTokenService);

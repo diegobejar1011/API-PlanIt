@@ -1,4 +1,4 @@
-import { AddUserAtGroup, GroupReq, GroupRes, UpdateGroupDto, UserAtGroup } from "../entities"
+import { AddUserAtGroup, UserByToken, GroupReq, GroupRes, UpdateGroupDto, UserAtGroup } from "../entities"
 
 export interface DataRepository {
     createGroup(group: GroupReq): Promise<void>;
@@ -7,5 +7,6 @@ export interface DataRepository {
     deleteGroup(id: number): Promise<void>;
     getUsersAtGroup(groupId: number): Promise<[UserAtGroup]>;
     addUserAtGroup(addUserAtGroup: AddUserAtGroup): Promise<void>;
-    deleteUserAtGroup(userGroupid: number): Promise<void>;
+    deleteUserAtGroup(add: number): Promise<void>;
+    addUserByToken(addUserByToken: UserByToken): Promise<void>;
 }

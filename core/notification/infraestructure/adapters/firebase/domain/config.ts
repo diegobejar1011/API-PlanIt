@@ -1,5 +1,5 @@
 import admin from "firebase-admin";
-import serviceAccount from "./credentials/peaceful-parity-451919-e8-firebase-adminsdk-fbsvc-63adda6d28.json";
+import serviceAccount from "./credentials/concise-haven-450204-m1-firebase-adminsdk-fbsvc-486ce0bc1d.json";
 
 
 export const app = admin.initializeApp({

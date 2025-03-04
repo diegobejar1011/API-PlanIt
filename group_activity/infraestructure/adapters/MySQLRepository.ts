@@ -54,7 +54,7 @@ export class MySQLRepository implements DataRepository {
 
             return {
                 ...resultToGroupActivity[0][0],
-                users: [rows[0]]                
+                users: rows[0]               
             }
 
         } catch (error: any) {

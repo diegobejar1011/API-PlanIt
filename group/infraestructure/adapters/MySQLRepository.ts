@@ -1,8 +1,26 @@
 import { db } from "../../../core/data/mysql/application/conn";
-import { AddUserAtGroup, GroupReq, GroupRes, UpdateGroupDto, UserAtGroup } from "../../domain/entities";
+import { AddUserAtGroup, UserByToken, GroupReq, GroupRes, UpdateGroupDto, UserAtGroup } from "../../domain/entities";
 import { DataRepository } from "../../domain/repositories/DataRepository";
 
 export class MySQLRepository implements DataRepository {
+
+    async addUserByToken(addUserByToken: UserByToken): Promise<void> {
+        try {
+            const queryToGroupId = "SELECT id FROM `group` WHERE token = ?";
+
+            const result: any  = await db.execute(queryToGroupId, [addUserByToken.token]);
+
+            const queryToAddUserToGroup = "INSERT INTO group_user (user_id, group_id) VALUES (?,?)";
+
+            await db.execute(queryToAddUserToGroup, [addUserByToken.user_id, result[0][0].id]);
+
+
+        } catch (error: any) {
+            throw new Error(error.message);
+        }
+    }
+
+
 
     async getUsersAtGroup(groupId: number): Promise<[UserAtGroup]> {
         try {

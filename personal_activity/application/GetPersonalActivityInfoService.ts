@@ -10,8 +10,6 @@ export class GetPersonalActivityInfoService {
 
             const personalActivityInfo = await this.dataRepository.getPersonalActivityInfo(activity_id);
 
-            // const category = await this.getCategoryService.run(personalActivityInfo.category_id);
-
             const personalActivityInfoRes: PersonalActivityInfoRes = {
                 title: personalActivity.title,
                 category: personalActivityInfo.category,
@@ -19,6 +17,8 @@ export class GetPersonalActivityInfoService {
                 description: personalActivityInfo.description,
                 date: personalActivityInfo.date
             }
+
+            console.log(personalActivityInfoRes);
 
             return personalActivityInfoRes;
 

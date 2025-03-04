@@ -98,7 +98,7 @@ export class MySQLRepository implements DataRepository{
     async getPersonalActivityInfo(activity_id: number): Promise<PersonalActivityInfo> {
         try {
 
-            const query = `SELECT pai.id, c.name as category, pai.status, pai.description, pai.date_to 
+            const query = `SELECT pai.id, c.name as category, pai.status, pai.description, pai.date_to AS date
                             FROM personal_activity_info as pai 
                             INNER JOIN category AS c 
                             ON pai.Category_Id = c.id
