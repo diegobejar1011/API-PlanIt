@@ -6,16 +6,10 @@ export class MySQLRepository implements DataRepository{
 
     async getPersonalActivitiesInfo(): Promise<[PersonalActivityInfoRes]> {
         try {
-            const query = `SELECT pa.title, c.name, pai.date_to, u.firstname, tu.token
+            const query = `SELECT pai.id, pai.date_to
                             FROM personal_activity_info as pai
-                            INNER JOIN category as c
-                            ON pai.category_id = c.id
                             INNER JOIN personal_activity as pa
-                            ON pai.id = pa.activity_id
-                            INNER JOIN user as u 
-                            ON pa.user_id = u.id
-                            INNER JOIN token_user as tu
-                            ON u.id = tu.user_id`;
+                            ON pai.id = pa.activity_id`;
 
             const [rows]: any = await db.execute(query);
 

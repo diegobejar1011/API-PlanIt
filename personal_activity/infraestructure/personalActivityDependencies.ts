@@ -1,6 +1,8 @@
-import { CreatePersonalActivityService, GetPersonalActivitiesService, GetPersonalActivityInfoService, UpdatePersonalActivityService, DeletePersonalActivityService, GetPersonalActivitiesInfoService } from "../application";
+import { sendNotificationService } from "../../core/notification/infraestructure/adapters/firebase/firebaseServices";
+import { getTokenService } from "../../user/infraestructure/userDependencies";
+import { CreatePersonalActivityService, GetPersonalActivitiesService, GetPersonalActivityInfoService, UpdatePersonalActivityService, DeletePersonalActivityService, GetPersonalActivitiesInfoService, NotifyPersonalActivityService } from "../application";
 import { MySQLRepository } from "./adapters/MySQLRepository";
-import { CreatePersonalActivityController, DeletePersonalActivityController, GetPersonalActivitiesController, GetPersonalActivitiesInfoController, GetPersonalActivityInfoController, UpdatePersonalActivityController } from "./controllers";
+import { CreatePersonalActivityController, DeletePersonalActivityController, GetPersonalActivitiesController, GetPersonalActivitiesInfoController, GetPersonalActivityInfoController, NotifyPersonalActivityController, UpdatePersonalActivityController } from "./controllers";
 
 const mysqlRepository = new MySQLRepository();
 
@@ -10,6 +12,7 @@ const getPersonalActivityInfoService = new GetPersonalActivityInfoService(mysqlR
 const createPersonalActivityService = new CreatePersonalActivityService(mysqlRepository);
 const updatePersonalActivityService = new UpdatePersonalActivityService(mysqlRepository);
 const deletePersonalActivityService = new DeletePersonalActivityService(mysqlRepository);
+const notifyPersonalActivityService = new NotifyPersonalActivityService(mysqlRepository, getTokenService, sendNotificationService);
 
 export const getPersonalActivitiesController = new GetPersonalActivitiesController(getPersonalActivitiesService);
 export const getPersonalActivitiesInfoController = new GetPersonalActivitiesInfoController(getPersonalActivitiesInfoService);
@@ -17,6 +20,7 @@ export const getPersonalActivityInfoController = new GetPersonalActivityInfoCont
 export const createPersonalActivityController = new CreatePersonalActivityController(createPersonalActivityService);
 export const updatePersonalActivityController = new UpdatePersonalActivityController(updatePersonalActivityService);
 export const deletePersonalActivityController = new DeletePersonalActivityController(deletePersonalActivityService);
+export const notifyPersonalActivityController = new NotifyPersonalActivityController(notifyPersonalActivityService);
 
 
 

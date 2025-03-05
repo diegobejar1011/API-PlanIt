@@ -9,7 +9,8 @@ export class FirebaseRepository implements NotificationRepository {
             const message = {
                 data: {
                     title: notification.title,
-                    body: notification.body
+                    body: notification.body,
+                    image: notification.image || ""
                 },
                 token: notification.token
             };

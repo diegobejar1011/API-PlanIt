@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createPersonalActivityController, deletePersonalActivityController, getPersonalActivitiesController, getPersonalActivitiesInfoController, getPersonalActivityInfoController, updatePersonalActivityController } from "./personalActivityDependencies";
+import { createPersonalActivityController, deletePersonalActivityController, getPersonalActivitiesController, getPersonalActivitiesInfoController, getPersonalActivityInfoController, notifyPersonalActivityController, updatePersonalActivityController } from "./personalActivityDependencies";
 
 
 export const personalActivityRouter = Router();
@@ -10,3 +10,4 @@ personalActivityRouter.get("/:userId", getPersonalActivitiesController.run.bind(
 personalActivityRouter.post("/", createPersonalActivityController.run.bind(createPersonalActivityController));
 personalActivityRouter.put("/:id", updatePersonalActivityController.run.bind(updatePersonalActivityController));
 personalActivityRouter.delete("/:id", deletePersonalActivityController.run.bind(deletePersonalActivityController));
+personalActivityRouter.post("/notify/:id", notifyPersonalActivityController.run.bind(notifyPersonalActivityController));

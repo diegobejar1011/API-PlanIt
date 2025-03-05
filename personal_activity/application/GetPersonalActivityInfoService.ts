@@ -1,4 +1,3 @@
-import { PersonalActivityInfoRes } from "../domain/entities";
 import { DataRepository } from "../domain/repositories/DataRepository";
 
 export class GetPersonalActivityInfoService {
@@ -10,7 +9,7 @@ export class GetPersonalActivityInfoService {
 
             const personalActivityInfo = await this.dataRepository.getPersonalActivityInfo(activity_id);
 
-            const personalActivityInfoRes: PersonalActivityInfoRes = {
+            const personalActivityInfoRes = {
                 title: personalActivity.title,
                 category: personalActivityInfo.category,
                 status: personalActivityInfo.status,

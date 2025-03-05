@@ -1,7 +1,4 @@
 export interface PersonalActivityInfoRes {
-    title: string;
-    category: string;
-    status: string;
-    description: string;
+    id: number;
     date: Date;
 }
