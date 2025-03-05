@@ -3,4 +3,5 @@ export * from './DeleteGroupActivityInfoService';
 export * from './GetGroupActivitiesInfoService';
 export * from './GetGroupActivitiesService';
 export * from './GetGroupActivityInfoService';
+export * from './NotifyGroupActivityService';
 export * from './UpdateGroupActivityInfoService';

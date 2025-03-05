@@ -1,6 +1,7 @@
 export * from './AddUserAtGroup';
 export * from './CreateGroupDto';
 export * from './Group';
+export * from './GroupByUserId';
 export * from './GroupReq';
 export * from './GroupRes';
 export * from './UpdateGroupDto';

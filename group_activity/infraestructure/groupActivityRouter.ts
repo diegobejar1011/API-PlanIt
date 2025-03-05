@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createGroupActivityInfoController, deleteGroupActivityInfoController, getGroupActivitiesController, getGroupActivitiesInfoController, getGroupActivityInfoController, updateGroupActivityInfoController } from "./groupActivityDependencies";
+import { createGroupActivityInfoController, deleteGroupActivityInfoController, getGroupActivitiesController, getGroupActivitiesInfoController, getGroupActivityInfoController, notifyGroupActivityController, updateGroupActivityInfoController } from "./groupActivityDependencies";
 
 export const groupActivityRouter = Router();
 
@@ -9,4 +9,4 @@ groupActivityRouter.get("/:id", getGroupActivityInfoController.run.bind(getGroup
 groupActivityRouter.post("/", createGroupActivityInfoController.run.bind(createGroupActivityInfoController));
 groupActivityRouter.put("/:id", updateGroupActivityInfoController.run.bind(updateGroupActivityInfoController));
 groupActivityRouter.delete("/:id", deleteGroupActivityInfoController.run.bind(deleteGroupActivityInfoController));
-
+groupActivityRouter.post("/notify/:id", notifyGroupActivityController.run.bind(notifyGroupActivityController));

@@ -87,10 +87,7 @@ export class MySQLRepository implements DataRepository {
 
     async getGroupActivitiesInfo(): Promise<[GroupActivityInfo]> {
         try {
-            const query = `SELECT gai.id, c.name AS category, status, description, date_to 
-                            FROM group_activity_info AS gai
-                            INNER JOIN category AS c
-                            ON gai.category_id = c.id;`;
+            const query = `SELECT id, date_to FROM group_activity_info;`;
 
             const rows: any = await db.execute(query);  
 
