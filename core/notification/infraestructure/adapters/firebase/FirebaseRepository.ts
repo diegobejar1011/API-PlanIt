@@ -25,8 +25,6 @@ export class FirebaseRepository implements NotificationRepository {
 
     async sendMultipleNotification(multipleNotification: MultipleNotifications): Promise<void> {
         try {
-
-            console.log(multipleNotification);
             
             const message = {
                 data: {
