@@ -1,8 +1,24 @@
 import { db } from "../../../core/data/mysql/application/conn";
-import { AddUserAtGroup, UserByToken, GroupReq, GroupRes, UpdateGroupDto, UserAtGroup } from "../../domain/entities";
+import { AddUserAtGroup, UserByToken, GroupReq, GroupRes, UpdateGroupDto, UserAtGroup, GroupByUser } from "../../domain/entities";
 import { DataRepository } from "../../domain/repositories/DataRepository";
 
 export class MySQLRepository implements DataRepository {
+
+    async getGroupsByUserId(userId: number): Promise<[GroupByUser]> {
+        try {
+            
+            const query = "SELECT g.id, g.name FROM group_user AS gu INNER JOIN `group` AS g ON gu.group_id = g.id WHERE gu.user_id = ?";
+
+            const rows: any = await db.execute(query, [userId]);
+
+            return rows[0];
+
+        } catch (error: any) {
+            throw new Error(error.message);
+        }
+    }
+
+
 
     async addUserByToken(addUserByToken: UserByToken): Promise<void> {
         try {

@@ -12,6 +12,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MySQLRepository = void 0;
 const conn_1 = require("../../../core/data/mysql/application/conn");
 class MySQLRepository {
+    getGroupsByUserId(userId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const query = "SELECT g.id, g.name FROM group_user AS gu INNER JOIN `group` AS g ON gu.group_id = g.id WHERE gu.user_id = ?";
+                const rows = yield conn_1.db.execute(query, [userId]);
+                return rows[0];
+            }
+            catch (error) {
+                throw new Error(error.message);
+            }
+        });
+    }
     addUserByToken(addUserByToken) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

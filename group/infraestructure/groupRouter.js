@@ -12,3 +12,4 @@ exports.groupRouter.post("/user/add", groupDependencies_1.addUserAtGroupControll
 exports.groupRouter.get("/user/:id", groupDependencies_1.getUsersAtGroupController.run.bind(groupDependencies_1.getUsersAtGroupController));
 exports.groupRouter.delete("/user/:id", groupDependencies_1.deleteUserAtGroupController.run.bind(groupDependencies_1.deleteUserAtGroupController));
 exports.groupRouter.post("/user", groupDependencies_1.addUserAtGroupByTokenController.run.bind(groupDependencies_1.addUserAtGroupByTokenController));
+exports.groupRouter.get("/user/list/:id", groupDependencies_1.getGroupsByUserIdController.run.bind(groupDependencies_1.getGroupsByUserIdController));

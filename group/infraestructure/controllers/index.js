@@ -20,5 +20,6 @@ __exportStar(require("./CreateGroupController"), exports);
 __exportStar(require("./DeleteGroupController"), exports);
 __exportStar(require("./DeleteUserAtGroupController"), exports);
 __exportStar(require("./GetGroupByIdController"), exports);
+__exportStar(require("./GetGroupsByUserIdController"), exports);
 __exportStar(require("./GetUsersAtGroupController"), exports);
 __exportStar(require("./UpdateGroupController"), exports);

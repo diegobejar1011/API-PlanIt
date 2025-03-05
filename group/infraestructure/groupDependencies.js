@@ -1,8 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addUserAtGroupByTokenController = exports.getUsersAtGroupController = exports.deleteUserAtGroupController = exports.addUserAtGroupController = exports.deleteGroupController = exports.updateGroupController = exports.getGroupByIdController = exports.createGroupController = void 0;
+exports.getGroupsByUserIdController = exports.addUserAtGroupByTokenController = exports.getUsersAtGroupController = exports.deleteUserAtGroupController = exports.addUserAtGroupController = exports.deleteGroupController = exports.updateGroupController = exports.getGroupByIdController = exports.createGroupController = void 0;
 const application_1 = require("../application");
-const AddUserByTokenService_1 = require("../application/AddUserByTokenService");
 const MySQLRepository_1 = require("./adapters/MySQLRepository");
 const UuidRepository_1 = require("./adapters/UuidRepository");
 const controllers_1 = require("./controllers");
@@ -15,7 +14,8 @@ const deleteGroupService = new application_1.DeleteGroupService(mysqlRepository)
 const addUserAtGroupService = new application_1.AddUserAtGroupService(mysqlRepository);
 const deleteUserAtGroupService = new application_1.DeleteUserAtGroupService(mysqlRepository);
 const getUsersAtGroupService = new application_1.GetUsersAtGroupService(mysqlRepository);
-const addUserByTokenService = new AddUserByTokenService_1.AddUserByTokenService(mysqlRepository);
+const addUserByTokenService = new application_1.AddUserByTokenService(mysqlRepository);
+const getGroupsByUserIdService = new application_1.GetGroupsByUserIdService(mysqlRepository);
 exports.createGroupController = new controllers_1.CreateGroupController(createGroupService);
 exports.getGroupByIdController = new controllers_1.GetGroupByIdController(getGroupByIdService);
 exports.updateGroupController = new controllers_1.UpdateGroupController(updateGroupService);
@@ -24,3 +24,4 @@ exports.addUserAtGroupController = new controllers_1.AddUserAtGroupController(ad
 exports.deleteUserAtGroupController = new controllers_1.DeleteUserAtGroupController(deleteUserAtGroupService);
 exports.getUsersAtGroupController = new controllers_1.GetUsersAtGroupController(getUsersAtGroupService);
 exports.addUserAtGroupByTokenController = new controllers_1.AddUserByTokenController(addUserByTokenService);
+exports.getGroupsByUserIdController = new controllers_1.GetGroupsByUserIdController(getGroupsByUserIdService);

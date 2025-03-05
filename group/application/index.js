@@ -15,9 +15,11 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./AddUserAtGroupService"), exports);
+__exportStar(require("./AddUserByTokenService"), exports);
 __exportStar(require("./CreateGroupService"), exports);
 __exportStar(require("./DeleteGroupService"), exports);
 __exportStar(require("./DeleteUserAtGroupService"), exports);
 __exportStar(require("./GetGroupByIdService"), exports);
+__exportStar(require("./GetGroupsByUserIdService"), exports);
 __exportStar(require("./GetUsersAtGroupService"), exports);
 __exportStar(require("./UpdateGroupService"), exports);

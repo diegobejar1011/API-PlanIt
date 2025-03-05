@@ -4,5 +4,6 @@ export * from './CreateGroupController';
 export * from './DeleteGroupController';
 export * from './DeleteUserAtGroupController';
 export * from './GetGroupByIdController';
+export * from './GetGroupsByUserIdController';
 export * from './GetUsersAtGroupController';
 export * from './UpdateGroupController';

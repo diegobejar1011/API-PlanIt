@@ -17,6 +17,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./AddUserAtGroup"), exports);
 __exportStar(require("./CreateGroupDto"), exports);
 __exportStar(require("./Group"), exports);
+__exportStar(require("./GroupByUser"), exports);
 __exportStar(require("./GroupReq"), exports);
 __exportStar(require("./GroupRes"), exports);
 __exportStar(require("./UpdateGroupDto"), exports);
