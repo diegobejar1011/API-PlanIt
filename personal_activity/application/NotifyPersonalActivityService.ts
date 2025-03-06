@@ -7,6 +7,8 @@ export class NotifyPersonalActivityService {
 
     async run(activityId: number){
         try {
+
+            console.log(activityId);
             
             const personalActivity = await this.dataRepository.getPersonalActivity(activityId);
 
@@ -20,6 +22,7 @@ export class NotifyPersonalActivityService {
             });
 
         } catch (error: any) {
+            console.log(error.message);
             throw new Error(error.message);
         }
     }

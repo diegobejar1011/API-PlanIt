@@ -7,6 +7,8 @@ export class NotifyGroupActivityService {
     async run(groupActivityId: number){
         try {
 
+            console.log(groupActivityId);
+
             let tokens: string[] = [];
             
             const groupActivity = await this.dataRepository.getGroupActivityInfo(groupActivityId);
@@ -26,6 +28,7 @@ export class NotifyGroupActivityService {
 
 
         } catch (error: any) {
+            console.log(error.message);
             throw new Error(error.message);
         }
     }
