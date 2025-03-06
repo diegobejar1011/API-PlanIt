@@ -2,7 +2,7 @@
 import { MySQLRepository } from "./adapters/MySQLRepository";
 
 // Services
-import { CreateUserService, SaveTokenService, ValidateUserService } from "../application";
+import { CreateUserService, GetUserByIdService, SaveTokenService, ValidateUserService } from "../application";
 
 // Controllers
 import { CreateUserController, SaveTokenController, ValidateUserController } from "./controllers";
@@ -16,6 +16,7 @@ const bcryptRepository = new BcryptRepository();
 const createUserService = new CreateUserService(mysqlRepository, bcryptRepository);
 const validateUserService = new ValidateUserService(mysqlRepository, bcryptRepository, createTokenService);
 const saveTokenService = new SaveTokenService(mysqlRepository);
+export const getUserByIdService = new GetUserByIdService(mysqlRepository);
 
 export const getTokenService = new GetTokenService(mysqlRepository);
 

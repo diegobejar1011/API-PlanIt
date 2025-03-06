@@ -4,6 +4,7 @@ export * from './Group';
 export * from './GroupByUserId';
 export * from './GroupReq';
 export * from './GroupRes';
+export * from './GroupUser';
 export * from './UpdateGroupDto';
 export * from './UserAtGroup';
 export * from './UserByToken';

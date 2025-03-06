@@ -1,9 +1,49 @@
 import { db } from "../../../core/data/mysql/application/conn";
-import { AddUserAtGroup, UserByToken, GroupReq, GroupRes, UpdateGroupDto, UserAtGroup } from "../../domain/entities";
+import { AddUserAtGroup, UserByToken, GroupReq, GroupRes, UpdateGroupDto, UserAtGroup, Group, GroupUser } from "../../domain/entities";
 import { GroupByUserId } from "../../domain/entities/GroupByUserId";
 import { DataRepository } from "../../domain/repositories/DataRepository";
 
 export class MySQLRepository implements DataRepository {
+
+    async getGroupByActivity(activityId: number): Promise<Group> {
+        try {
+            const query = 'SELECT g.id, g.user_id, g.name, g.description, g.token FROM group_activity_info AS gai INNER JOIN group_activity AS ga ON gai.id = ga.activity_id INNER JOIN `group` AS g ON ga.group_id = g.id WHERE gai.id = ?';
+            
+            const result: any = await db.execute(query, [activityId]);
+
+            return result[0][0];
+
+        } catch (error: any) {
+            throw new Error(error.message);
+        }
+    }
+
+    async getGroupUser(groupUser: number): Promise<GroupUser> {
+        try {
+            const query = "SELECT id, group_id, user_id FROM group_user WHERE id = ?";
+
+            const result: any = await db.execute(query, [groupUser]);
+
+            return result[0][0];
+
+        } catch (error: any) {
+            throw new Error(error.message);
+        }
+    }
+
+    async getGroupByToken(token: string): Promise<Group> {
+        try {
+            
+            const query = "SELECT id, user_id, name, description, token FROM `group` WHERE token = ?";
+
+            const result: any = await db.execute(query, [token]);
+
+            return result[0][0];
+            
+        } catch (error: any) {
+            throw new Error(error.message);
+        }
+    }
 
     async getGroupsByUserId(userId: number): Promise<[GroupByUserId]> {
         try {
@@ -99,12 +139,23 @@ export class MySQLRepository implements DataRepository {
 
     async createGroup(group: GroupReq): Promise<void> {
         try {
-            const query = "INSERT INTO `group` (user_id, name, description, token) VALUES (?, ?, ?, ?)";
-            ;
 
-            await db.execute(query, [group.user_id, group.name, group.description, group.token]);
+            await db.beginTransaction();
+
+            const query = "INSERT INTO `group` (user_id, name, description, token) VALUES (?, ?, ?, ?)";
+
+            const result : any = await db.execute(query, [group.user_id, group.name, group.description, group.token]);
+
+            const queryToAddUserToGroup = "INSERT INTO group_user (group_id, user_id) VALUES (?, ?)";
+
+            await db.execute(queryToAddUserToGroup, [result[0].insertId, group.user_id]);
+
+            await db.commit();
 
         } catch (error: any) {
+            
+            await db.rollback();
+
             throw new Error(error.message);
         }
     }

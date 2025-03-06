@@ -1,4 +1,5 @@
 import { sendMultipleNotificationService } from "../../core/notification/infraestructure/adapters/firebase/firebaseServices";
+import { getGroupByIdService } from "../../group/infraestructure/groupDependencies";
 import { getTokenService } from "../../user/infraestructure/userDependencies";
 import { CreateGroupActivityInfoService, DeleteGroupActivityInfoService, GetGroupActivitiesInfoService, GetGroupActivitiesService, GetGroupActivityInfoService, NotifyGroupActivityService, UpdateGroupActivityInfoService } from "../application";
 
@@ -7,10 +8,10 @@ import { CreateGroupActivityInfoController, DeleteGroupActivityInfoController, G
 
 const mysqlRepository = new MySQLRepository();
 
-const createGroupActivityInfoService = new CreateGroupActivityInfoService(mysqlRepository);
+const createGroupActivityInfoService = new CreateGroupActivityInfoService(mysqlRepository, sendMultipleNotificationService, getTokenService, getGroupByIdService);
 const getGroupActivityInfoService = new GetGroupActivityInfoService(mysqlRepository);
-const updateGroupActivityInfoService = new UpdateGroupActivityInfoService(mysqlRepository);
-const deleteGroupActivityInfoService = new DeleteGroupActivityInfoService(mysqlRepository);
+const updateGroupActivityInfoService = new UpdateGroupActivityInfoService(mysqlRepository, getTokenService, sendMultipleNotificationService);
+const deleteGroupActivityInfoService = new DeleteGroupActivityInfoService(mysqlRepository, sendMultipleNotificationService, getTokenService);
 
 const getGroupActivitiesInfoService = new GetGroupActivitiesInfoService(mysqlRepository);
 const getGroupActivitiesService = new GetGroupActivitiesService(mysqlRepository);

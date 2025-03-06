@@ -1,3 +1,5 @@
+import { sendNotificationService } from "../../core/notification/infraestructure/adapters/firebase/firebaseServices";
+import { getTokenService, getUserByIdService } from "../../user/infraestructure/userDependencies";
 import { AddUserAtGroupService, CreateGroupService, DeleteGroupService, DeleteUserAtGroupService, GetGroupByIdService, GetGroupsByUserIdService, GetUsersAtGroupService, UpdateGroupService } from "../application";
 import { AddUserByTokenService } from "../application/AddUserByTokenService";
 import { MySQLRepository } from "./adapters/MySQLRepository";
@@ -9,13 +11,13 @@ const mysqlRepository = new MySQLRepository();
 const uuidRepository = new UuidRepository();
 
 const createGroupService = new CreateGroupService(mysqlRepository, uuidRepository);
-const getGroupByIdService = new GetGroupByIdService(mysqlRepository);
+export const getGroupByIdService = new GetGroupByIdService(mysqlRepository);
 const updateGroupService = new UpdateGroupService(mysqlRepository);
 const deleteGroupService = new DeleteGroupService(mysqlRepository);
-const addUserAtGroupService = new AddUserAtGroupService(mysqlRepository);
-const deleteUserAtGroupService = new DeleteUserAtGroupService(mysqlRepository);
+const addUserAtGroupService = new AddUserAtGroupService(mysqlRepository, sendNotificationService, getTokenService);
+const deleteUserAtGroupService = new DeleteUserAtGroupService(mysqlRepository, sendNotificationService, getTokenService);
 const getUsersAtGroupService = new GetUsersAtGroupService(mysqlRepository);
-const addUserByTokenService = new AddUserByTokenService(mysqlRepository);
+const addUserByTokenService = new AddUserByTokenService(mysqlRepository, getTokenService, sendNotificationService, getUserByIdService);
 const getGroupsByUserIdService = new GetGroupsByUserIdService(mysqlRepository);
 
 export const createGroupController = new CreateGroupController(createGroupService);

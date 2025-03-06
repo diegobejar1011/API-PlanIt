@@ -1,4 +1,4 @@
-import { CreateUserReq, CreateUserRes, SaveTokenReq, User} from "../entities";
+import { CreateUserReq, CreateUserRes, SaveTokenReq, User, UserRes} from "../entities";
 
 
 export interface DataRepository {
@@ -6,4 +6,5 @@ export interface DataRepository {
     getUserByEmail(email: string): Promise<User>
     saveToken(saveTokenReq: SaveTokenReq): Promise<void>
     getToken(id: number): Promise<string>
+    getUserById(id: number): Promise<UserRes>
 }
