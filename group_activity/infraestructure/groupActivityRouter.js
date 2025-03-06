@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.groupActivityRouter = void 0;
+const express_1 = require("express");
+const groupActivityDependencies_1 = require("./groupActivityDependencies");
+exports.groupActivityRouter = (0, express_1.Router)();
+exports.groupActivityRouter.get("/all", groupActivityDependencies_1.getGroupActivitiesInfoController.run.bind(groupActivityDependencies_1.getGroupActivitiesInfoController));
+exports.groupActivityRouter.get("/preview", groupActivityDependencies_1.getGroupActivitiesController.run.bind(groupActivityDependencies_1.getGroupActivitiesController));
+exports.groupActivityRouter.get("/:id", groupActivityDependencies_1.getGroupActivityInfoController.run.bind(groupActivityDependencies_1.getGroupActivityInfoController));
+exports.groupActivityRouter.post("/", groupActivityDependencies_1.createGroupActivityInfoController.run.bind(groupActivityDependencies_1.createGroupActivityInfoController));
+exports.groupActivityRouter.put("/:id", groupActivityDependencies_1.updateGroupActivityInfoController.run.bind(groupActivityDependencies_1.updateGroupActivityInfoController));
+exports.groupActivityRouter.delete("/:id", groupActivityDependencies_1.deleteGroupActivityInfoController.run.bind(groupActivityDependencies_1.deleteGroupActivityInfoController));
+exports.groupActivityRouter.post("/notify/:id", groupActivityDependencies_1.notifyGroupActivityController.run.bind(groupActivityDependencies_1.notifyGroupActivityController));

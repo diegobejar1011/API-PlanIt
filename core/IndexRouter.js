@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.indexRouter = void 0;
+const express_1 = require("express");
+const userRouter_1 = require("../user/infraestructure/userRouter");
+const categoryRouter_1 = require("../category/infraestructure/categoryRouter");
+const personalActivityRouter_1 = require("../personal_activity/infraestructure/personalActivityRouter");
+const groupRouter_1 = require("../group/infraestructure/groupRouter");
+const groupActivityRouter_1 = require("../group_activity/infraestructure/groupActivityRouter");
+exports.indexRouter = (0, express_1.Router)();
+exports.indexRouter.use("/user", userRouter_1.userRouter);
+exports.indexRouter.use("/category", categoryRouter_1.categoryRouter);
+exports.indexRouter.use("/personal/activity", personalActivityRouter_1.personalActivityRouter);
+exports.indexRouter.use("/group", groupRouter_1.groupRouter);
+exports.indexRouter.use("/group/activity", groupActivityRouter_1.groupActivityRouter);
