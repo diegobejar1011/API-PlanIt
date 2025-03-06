@@ -7,4 +7,5 @@ export interface DataRepository {
     saveToken(saveTokenReq: SaveTokenReq): Promise<void>
     getToken(id: number): Promise<string>
     getUserById(id: number): Promise<UserRes>
+    confirmedToken(id: number): Promise<number>
 }

@@ -5,7 +5,14 @@ export class SaveTokenService{
     async run(id: number, token: string){
         try {
             
-            await this.dataRepository.saveToken({id, token});
+            const confirmedToken = await this.dataRepository.confirmedToken(id);
+
+            console.log(confirmedToken);
+
+            if(confirmedToken > 0) {
+                console.log("Ya tiene token");
+               //  await this.dataRepository.saveToken({id, token});
+            }
 
         } catch (error: any) {
             throw new Error(error.message);

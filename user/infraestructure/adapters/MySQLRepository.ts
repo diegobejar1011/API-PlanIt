@@ -4,6 +4,21 @@ import { DataRepository } from "../../domain/repositories/DataRepository";
 
 export class MySQLRepository implements DataRepository {
 
+    async confirmedToken(id: number): Promise<number> {
+        try {
+            
+
+            const query = `SELECT COUNT(*) AS confirmed FROM token_user WHERE user_id = ?`;
+
+            const result: any = await db.execute(query, [id]);
+
+            return result[0][0].confirmed;
+
+        } catch (error: any) {
+            throw new Error(error.message);
+        }
+    }
+
     async getUserById(id: number): Promise<UserRes> {
         try {
             const query = "SELECT id, firstname, lastname FROM user WHERE id = ?";
