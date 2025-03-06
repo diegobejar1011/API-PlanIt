@@ -1,4 +1,4 @@
-import { sendNotificationService } from "../../core/notification/infraestructure/adapters/firebase/firebaseServices";
+import { sendMultipleNotificationService, sendNotificationService } from "../../core/notification/infraestructure/adapters/firebase/firebaseServices";
 import { getTokenService, getUserByIdService } from "../../user/infraestructure/userDependencies";
 import { AddUserAtGroupService, CreateGroupService, DeleteGroupService, DeleteUserAtGroupService, GetGroupByIdService, GetGroupsByUserIdService, GetUsersAtGroupService, UpdateGroupService } from "../application";
 import { AddUserByTokenService } from "../application/AddUserByTokenService";
@@ -13,7 +13,7 @@ const uuidRepository = new UuidRepository();
 const createGroupService = new CreateGroupService(mysqlRepository, uuidRepository);
 export const getGroupByIdService = new GetGroupByIdService(mysqlRepository);
 const updateGroupService = new UpdateGroupService(mysqlRepository);
-const deleteGroupService = new DeleteGroupService(mysqlRepository);
+const deleteGroupService = new DeleteGroupService(mysqlRepository, getTokenService, sendMultipleNotificationService);
 const addUserAtGroupService = new AddUserAtGroupService(mysqlRepository, sendNotificationService, getTokenService);
 const deleteUserAtGroupService = new DeleteUserAtGroupService(mysqlRepository, sendNotificationService, getTokenService);
 const getUsersAtGroupService = new GetUsersAtGroupService(mysqlRepository);
