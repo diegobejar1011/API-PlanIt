@@ -9,7 +9,7 @@ export class SaveTokenService{
 
             console.log(confirmedToken);
 
-            if(confirmedToken > 0) {
+            if(confirmedToken <= 0) {
                 console.log("Ya tiene token");
                await this.dataRepository.saveToken({id, token});
             }
