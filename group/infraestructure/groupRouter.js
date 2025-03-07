@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.groupRouter = void 0;
+const express_1 = require("express");
+const groupDependencies_1 = require("./groupDependencies");
+exports.groupRouter = (0, express_1.Router)();
+exports.groupRouter.get("/:id", groupDependencies_1.getGroupByIdController.run.bind(groupDependencies_1.getGroupByIdController));
+exports.groupRouter.post("/", groupDependencies_1.createGroupController.run.bind(groupDependencies_1.createGroupController));
+exports.groupRouter.put("/:id", groupDependencies_1.updateGroupController.run.bind(groupDependencies_1.updateGroupController));
+exports.groupRouter.delete("/:id", groupDependencies_1.deleteGroupController.run.bind(groupDependencies_1.deleteGroupController));
+exports.groupRouter.post("/user/add", groupDependencies_1.addUserAtGroupController.run.bind(groupDependencies_1.addUserAtGroupController));
+exports.groupRouter.get("/user/:id", groupDependencies_1.getUsersAtGroupController.run.bind(groupDependencies_1.getUsersAtGroupController));
+exports.groupRouter.delete("/user/:id", groupDependencies_1.deleteUserAtGroupController.run.bind(groupDependencies_1.deleteUserAtGroupController));
+exports.groupRouter.post("/user", groupDependencies_1.addUserAtGroupByTokenController.run.bind(groupDependencies_1.addUserAtGroupByTokenController));
+exports.groupRouter.get("/user/list/:id", groupDependencies_1.getGroupsByUserIdController.run.bind(groupDependencies_1.getGroupsByUserIdController));
