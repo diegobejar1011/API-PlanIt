@@ -19,9 +19,11 @@ class SaveTokenService {
             try {
                 const confirmedToken = yield this.dataRepository.confirmedToken(id);
                 console.log(confirmedToken);
-                if (confirmedToken < 0) {
-                    console.log("Ya tiene token");
+                if (confirmedToken <= 0) {
                     yield this.dataRepository.saveToken({ id, token });
+                }
+                else {
+                    console.log("Ya tiene token");
                 }
             }
             catch (error) {

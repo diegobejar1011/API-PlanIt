@@ -10,8 +10,9 @@ export class SaveTokenService{
             console.log(confirmedToken);
 
             if(confirmedToken <= 0) {
-                console.log("Ya tiene token");
                await this.dataRepository.saveToken({id, token});
+            } else {
+                console.log("Ya tiene token");
             }
 
         } catch (error: any) {
